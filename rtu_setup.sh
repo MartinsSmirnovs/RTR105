@@ -19,6 +19,7 @@ echo "Installing Visual Studio Code extensions"
 code --install-extension shardulm94.trailing-spaces
 code --install-extension nathanridley.autotrim
 code --install-extension xaver.clang-format
+code --install-extension ms-vscode.cpptools
 
 echo
 echo "Cloning git repository"
