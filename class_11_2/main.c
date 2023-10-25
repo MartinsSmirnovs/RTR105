@@ -16,10 +16,11 @@ int main() {
     int shortWordsCount = 0;
     int wordsCount      = 0;
 
-    for (int i = 0, letterCount = 0; i < S_SENTENCE; i++) {
+    const int sentenceLength = strlen(sentence);
+    for (int i = 0, letterCount = 0; i <= sentenceLength; i++) {
         const char currentCharacter = sentence[i];
 
-        if (currentCharacter == ' ' || currentCharacter == '.' || currentCharacter == '\n') {
+        if (currentCharacter == ' ' || currentCharacter == '.' || i == sentenceLength) {
             wordsCount++;
 
             if (letterCount <= SHORT_WORD_LENGTH) {
@@ -28,9 +29,10 @@ int main() {
 
             letterCount = 0;
 
-            if (currentCharacter == '.' || currentCharacter == '\n') {
+            if (currentCharacter == '.' || i == sentenceLength) {
                 break;
             }
+
             continue;
         }
         letterCount++;
