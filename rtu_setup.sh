@@ -20,6 +20,7 @@ code --install-extension shardulm94.trailing-spaces
 code --install-extension nathanridley.autotrim
 code --install-extension xaver.clang-format
 code --install-extension ms-vscode.cpptools
+code --install-extension mammothb.gnuplot
 
 echo
 echo "Cloning git repository"
