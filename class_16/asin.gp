@@ -6,7 +6,7 @@ set xrange [-1:1]
 set yrange [-1:1]
 
 # set term png
-# set output "images/output.png"
+# set output "images/asin.png"
 
 f0(x) =         (2*0)!*x**(2*0+1) / 4**0*(0!)**2*(2*0+1)
 f1(x) = f0(x) + (2*1)!*x**(2*1+1) / 4**0*(1!)**2*(2*1+1)
