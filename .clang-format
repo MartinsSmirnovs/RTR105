@@ -14,7 +14,7 @@ AccessModifierOffset: -2
 
 AlignAfterOpenBracket: Align
 
-AlignConsecutiveAssignments: true
+AlignConsecutiveAssignments: false
 
 AlignOperands: false
 
