@@ -28,7 +28,7 @@ int main()
 
     if ( displacedAsin( a, c ) * displacedAsin( b, c ) > 0 )
     {
-        printf( "There are no roots for asin(x) in range [%.3f;%.3f] or there is even number of roots\n", a, b );
+        printf( "There are no roots for asin(x) in range [%.3f;%.3f]\n", a, b );
         return 0;
     }
 

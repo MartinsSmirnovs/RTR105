@@ -17,4 +17,4 @@ set mxtics 2
 # set term png
 # set output "images/asin.png"
 
-plot asin(x) lw 3, asin(x)-1 lw 3, asin(x)+1
+plot asin(x) lw 3, asin(x)-1 lw 3, asin(x)+1 lw 3
