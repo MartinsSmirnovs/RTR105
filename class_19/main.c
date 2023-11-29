@@ -1,6 +1,8 @@
 #include <math.h>
 #include <stdio.h>
 
+// MAKE THIS USING ARRAYS
+
 int main()
 {
     const float a = -1;
