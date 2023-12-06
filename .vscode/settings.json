@@ -4,7 +4,18 @@
     "editor.defaultFormatter": "xaver.clang-format",
     "files.associations": {
         "typeindex": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "functional": "c",
+        "ratio": "c",
+        "system_error": "c",
+        "array": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c",
+        "optional": "c",
+        "istream": "c",
+        "ostream": "c",
+        "variant": "c"
     },
     "files.eol": "\n"
 }

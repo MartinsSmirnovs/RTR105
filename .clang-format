@@ -111,7 +111,7 @@ SpacesInContainerLiterals: false
 
 SpacesInParentheses: true
 
-SpacesInSquareBrackets: false
+SpacesInSquareBrackets: true
 
 Standard: Cpp11
 
