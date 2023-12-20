@@ -9,12 +9,8 @@ float input( const char* prompt )
     return value;
 }
 
-int main()
+float asinIntegralUsingSteps( float lowerRange, float upperRange, float precision )
 {
-    const float a = input( "Please input lower range value a in range[-1:1]:\n" );
-    const float b = input( "Please input upper range value b in range[a:1]:\n" );
-    const float precision = input( "Please input precision value delta:\n" );
-
     float integralValue = 0;
     float integralValuePrevious = 0;
     int stepCount = 1;
@@ -23,21 +19,33 @@ int main()
     {
         stepCount *= 2;
 
-        const float step = ( b - a ) / stepCount;
+        const float step = ( lowerRange - upperRange ) / stepCount;
 
         integralValuePrevious = integralValue;
 
         integralValue = 0;
-        for ( int i = 0, integralValue = 0; i < stepCount; i++ )
+        for ( int i = 0; i < stepCount; i++ )
         {
-            integralValue += step * asin( a + i * step );
+            // Step displacement is a form of optimization
+            const float stepDisplacement = step * 0.5;
+
+            integralValue += step * asin( lowerRange + i * step + stepDisplacement );
         }
-        printf( "Rectangles: %d\n", stepCount );
-        printf( "Intermediate: %.2f\n", integralValue );
     }
     while ( fabs( integralValue - integralValuePrevious ) > precision );
 
-    printf( "Result: %.2f\n", integralValue );
+    return integralValue;
+}
+
+int main()
+{
+    const float a = input( "Please input lower range value a in range[-1:1]:\n" );
+    const float b = input( "Please input upper range value b in range[a:1]:\n" );
+    const float precision = input( "Please input precision value:\n" );
+
+    const float integral = asinIntegralUsingSteps( a, b, precision );
+
+    printf( "Result: %.2f\n", integral );
 
     return 0;
 }
