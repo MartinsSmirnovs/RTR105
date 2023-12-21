@@ -1,11 +1,11 @@
 #include <math.h>
 #include <stdio.h>
 
-float input( const char* prompt )
+long double input( const char* prompt )
 {
-    float value = 0;
+    long double value = 0;
     fprintf( stderr, prompt );
-    scanf( "%f", &value );
+    scanf( "%Lf", &value );
     return value;
 }
 
@@ -16,13 +16,13 @@ enum Method
     Method_Simpsons
 };
 
-float asinIntegralUsingSteps( float lowerRange, float step, float stepCount )
+long double asinIntegralUsingSteps( long double lowerRange, long double step, long double stepCount )
 {
-    float integralValue = 0;
+    long double integralValue = 0;
 
-    for ( int i = 0; i < stepCount; i++ )
+    for ( long int i = 0; i < stepCount; i++ )
     {
-        const float a = lowerRange + i * step;
+        const long double a = lowerRange + i * step;
 
         // Step displacement is a form of optimization
         integralValue += step * asin( a + step / 2 );
@@ -31,15 +31,15 @@ float asinIntegralUsingSteps( float lowerRange, float step, float stepCount )
     return integralValue;
 }
 
-float asinIntegralUsingSimpsonsRule( float lowerRange, float step, float stepCount )
+long double asinIntegralUsingSimpsonsRule( long double lowerRange, long double step, long double stepCount )
 {
-    float integralValue = 0;
+    long double integralValue = 0;
 
     // We have to do one iteration less due to the algorithm requiring one value forward
-    for ( int i = 0; i < stepCount - 1; i++ )
+    for ( long int i = 0; i < stepCount - 1; i++ )
     {
-        const float a = lowerRange + step * i;
-        const float b = lowerRange + step * ( i + 1 );
+        const long double a = lowerRange + step * i;
+        const long double b = lowerRange + step * ( i + 1 );
 
         integralValue += asin( a ) + 4 * asin( ( a + b ) / 2 ) + asin( b );
     }
@@ -47,18 +47,18 @@ float asinIntegralUsingSimpsonsRule( float lowerRange, float step, float stepCou
     return integralValue * step / 6;
 }
 
-float asinIntegralUsingTrapezoids( float lowerRange, float step, float stepCount )
+long double asinIntegralUsingTrapezoids( long double lowerRange, long double step, long double stepCount )
 {
-    float integralValue = 0;
+    long double integralValue = 0;
 
     // We have to do one iteration less due to the algorithm requiring one value forward
-    for ( int i = 0; i < stepCount - 1; i++ )
+    for ( long int i = 0; i < stepCount - 1; i++ )
     {
-        const float a = lowerRange + step * i;
-        const float b = lowerRange + step * ( i + 1 );
+        const long double a = lowerRange + step * i;
+        const long double b = lowerRange + step * ( i + 1 );
 
-        const float point = asin( a );
-        const float pointNext = asin( b );
+        const long double point = asin( a );
+        const long double pointNext = asin( b );
 
         integralValue += ( point + pointNext ) * step / 2;
     }
@@ -66,17 +66,17 @@ float asinIntegralUsingTrapezoids( float lowerRange, float step, float stepCount
     return integralValue;
 }
 
-float asinIntegral( float lowerRange, float upperRange, float precision, enum Method method )
+long double asinIntegral( long double lowerRange, long double upperRange, long double precision, enum Method method )
 {
-    float integralValue = 0;
-    float integralValuePrevious = 0;
-    int stepCount = 1;
+    long double integralValue = 0;
+    long double integralValuePrevious = 0;
+    long int stepCount = 1;
 
     do
     {
         stepCount *= 2;
 
-        const float step = ( lowerRange - upperRange ) / stepCount;
+        const long double step = ( lowerRange - upperRange ) / stepCount;
 
         integralValuePrevious = integralValue;
         integralValue = 0;
@@ -105,22 +105,25 @@ float asinIntegral( float lowerRange, float upperRange, float precision, enum Me
     }
     while ( fabs( integralValue - integralValuePrevious ) > precision );
 
+
+    // fprintf( stderr, "step count: %ld\n", stepCount );
+
     return integralValue;
 }
 
 int main()
 {
-    const float a = input( "Please input lower range value a in range[-1:1]:\n" );
-    const float b = input( "Please input upper range value b in range[a:1]:\n" );
-    const float precision = input( "Please input precision value:\n" );
+    const long double a = input( "Please input lower range value a in range[-1:1]:\n" );
+    const long double b = input( "Please input upper range value b in range[a:1]:\n" );
+    const long double precision = input( "Please input precision value:\n" );
 
-    const float integralUsingSteps = asinIntegral( a, b, precision, Method_Step );
-    const float integralUsingTrapezoids = asinIntegral( a, b, precision, Method_Trapezoid );
-    const float integralUsingSimpsonsRule = asinIntegral( a, b, precision, Method_Simpsons );
+    const long double integralUsingSteps = asinIntegral( a, b, precision, Method_Step );
+    const long double integralUsingTrapezoids = asinIntegral( a, b, precision, Method_Trapezoid );
+    const long double integralUsingSimpsonsRule = asinIntegral( a, b, precision, Method_Simpsons );
 
-    printf( "asin(x) integral value in range [ %.5f : %.5f ] using step function method: %.5f\n", a, b, integralUsingSteps );
-    printf( "asin(x) integral value in range [ %.5f : %.5f ] using trapezoidal rule: %.5f\n", a, b, integralUsingTrapezoids );
-    printf( "asin(x) integral value in range [ %.5f : %.5f ] using Simpson's rule: %.5f\n", a, b, integralUsingSimpsonsRule );
+    printf( "asin(x) integral value in range [ %.5Lf : %.5Lf ] using step function method: %.30Lf\n", a, b, integralUsingSteps );
+    printf( "asin(x) integral value in range [ %.5Lf : %.5Lf ] using trapezoidal rule:     %.30Lf\n", a, b, integralUsingTrapezoids );
+    printf( "asin(x) integral value in range [ %.5Lf : %.5Lf ] using Simpson's rule:       %.30Lf\n", a, b, integralUsingSimpsonsRule );
 
     return 0;
 }
