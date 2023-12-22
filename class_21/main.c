@@ -106,7 +106,7 @@ long double asinIntegral( long double lowerRange, long double upperRange, long d
     while ( fabs( integralValue - integralValuePrevious ) > precision );
 
 
-    // fprintf( stderr, "step count: %ld\n", stepCount );
+    // fprintf( stderr, "Step count: %ld\n", stepCount );
 
     return integralValue;
 }
