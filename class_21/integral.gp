@@ -2,8 +2,8 @@
 
 set grid
 
-set term png
-set output "images/integral.png"
+# set term png
+# set output "images/integral.png"
 
 set xzeroaxis lt 1 lc rgb 'black' lw 1
 set yzeroaxis lt 1 lc rgb 'black' lw 1
